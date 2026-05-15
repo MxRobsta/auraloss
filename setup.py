@@ -6,9 +6,9 @@ from setuptools import setup, find_packages
 
 NAME = "auraloss"
 DESCRIPTION = "Audio-focused loss functions in PyTorch"
-URL = "https://github.com/csteinmetz1/auraloss"
-EMAIL = "c.j.steinmetz@qmul.ac.uk"
-AUTHOR = "Christian Steinmetz"
+URL = "https://github.com/MxRobsta/RobAuraLoss"
+EMAIL = "rwhsutherland1@sheffield.ac.uk"
+AUTHOR = "Robbie Sutherland"
 REQUIRES_PYTHON = ">=3.6.0"
 VERSION = "0.4.0"
 
