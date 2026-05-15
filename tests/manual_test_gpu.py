@@ -1,11 +1,11 @@
 import torch
-import auraloss
+import RobAuraLoss
 
 y_hat = torch.randn(2, 1, 131072)
 y = torch.randn(2, 1, 131072)
 
-loss_fn = auraloss.freq.MelSTFTLoss(44100)
-loss_fn2 = auraloss.freq.MultiResolutionSTFTLoss()
+loss_fn = RobAuraLoss.freq.MelSTFTLoss(44100)
+loss_fn2 = RobAuraLoss.freq.MultiResolutionSTFTLoss()
 
 # loss_fn.cuda()
 

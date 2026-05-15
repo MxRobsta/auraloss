@@ -1,5 +1,5 @@
 import torch
-import auraloss
+import RobAuraLoss
 import torchaudio
 from tqdm import tqdm
 
@@ -174,7 +174,7 @@ if __name__ == "__main__":
     model.cuda()
 
     # create loss function
-    loss_fn = auraloss.freq.SumAndDifferenceSTFTLoss(
+    loss_fn = RobAuraLoss.freq.SumAndDifferenceSTFTLoss(
         fft_sizes=[1024, 2048, 8192],
         hop_sizes=[256, 512, 2048],
         win_lengths=[1024, 2048, 8192],

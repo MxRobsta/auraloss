@@ -5,7 +5,7 @@ import numpy as np
 import pytorch_lightning as pl
 from argparse import ArgumentParser
 
-import auraloss
+import RobAuraLoss
 
 
 def center_crop(x, shape):
@@ -137,13 +137,13 @@ class TCNModel(pl.LightningModule):
 
         # setup loss functions
         self.l1 = torch.nn.L1Loss()
-        self.esr = auraloss.time.ESRLoss()
-        self.dc = auraloss.time.DCLoss()
-        self.logcosh = auraloss.time.LogCoshLoss()
-        self.sisdr = auraloss.time.SISDRLoss()
-        self.stft = auraloss.freq.STFTLoss()
-        self.mrstft = auraloss.freq.MultiResolutionSTFTLoss()
-        self.rrstft = auraloss.freq.RandomResolutionSTFTLoss()
+        self.esr = RobAuraLoss.time.ESRLoss()
+        self.dc = RobAuraLoss.time.DCLoss()
+        self.logcosh = RobAuraLoss.time.LogCoshLoss()
+        self.sisdr = RobAuraLoss.time.SISDRLoss()
+        self.stft = RobAuraLoss.freq.STFTLoss()
+        self.mrstft = RobAuraLoss.freq.MultiResolutionSTFTLoss()
+        self.rrstft = RobAuraLoss.freq.RandomResolutionSTFTLoss()
 
         if nparams > 0:
             self.gen = torch.nn.Sequential(

@@ -4,7 +4,7 @@
 from pathlib import Path
 from setuptools import setup, find_packages
 
-NAME = "auraloss"
+NAME = "RobAuraLoss"
 DESCRIPTION = "Audio-focused loss functions in PyTorch"
 URL = "https://github.com/MxRobsta/RobAuraLoss"
 EMAIL = "rwhsutherland1@sheffield.ac.uk"

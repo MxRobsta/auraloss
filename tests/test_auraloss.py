@@ -1,14 +1,14 @@
 import math
 import os
 import torch
-import auraloss
+import RobAuraLoss
 
 
 def test_mrstft():
     target = torch.rand(8, 2, 44100)
     pred = torch.rand(8, 2, 44100)
 
-    loss = auraloss.freq.MultiResolutionSTFTLoss()
+    loss = RobAuraLoss.freq.MultiResolutionSTFTLoss()
     res = loss(pred, target)
     assert res is not None
 
@@ -17,7 +17,7 @@ def test_stft():
     target = torch.rand(8, 2, 44100)
     pred = torch.rand(8, 2, 44100)
 
-    loss = auraloss.freq.STFTLoss()
+    loss = RobAuraLoss.freq.STFTLoss()
     res = loss(pred, target)
     assert res is not None
 
@@ -26,7 +26,7 @@ def test_stft_weights_a():
     target = torch.rand(8, 2, 44100)
     pred = torch.rand(8, 2, 44100)
     # test difference weights
-    loss = auraloss.freq.STFTLoss(
+    loss = RobAuraLoss.freq.STFTLoss(
         w_log_mag=1.0,
         w_lin_mag=0.0,
         w_sc=1.0,
@@ -40,7 +40,7 @@ def test_stft_reduction():
     target = torch.rand(8, 2, 44100)
     pred = torch.rand(8, 2, 44100)
     # test the reduction
-    loss = auraloss.freq.STFTLoss(
+    loss = RobAuraLoss.freq.STFTLoss(
         w_log_mag=1.0,
         w_lin_mag=1.0,
         w_sc=0.0,
@@ -54,7 +54,7 @@ def test_stft_reduction():
 def test_sum_and_difference():
     target = torch.rand(8, 2, 44100)
     pred = torch.rand(8, 2, 44100)
-    loss = auraloss.freq.SumAndDifferenceSTFTLoss(
+    loss = RobAuraLoss.freq.SumAndDifferenceSTFTLoss(
         fft_sizes=[512, 2048, 8192],
         hop_sizes=[128, 512, 2048],
         win_lengths=[512, 2048, 8192],
@@ -66,7 +66,7 @@ def test_sum_and_difference():
 def test_perceptual_sum_and_difference():
     target = torch.rand(8, 2, 44100)
     pred = torch.rand(8, 2, 44100)
-    loss_fn = auraloss.freq.SumAndDifferenceSTFTLoss(
+    loss_fn = RobAuraLoss.freq.SumAndDifferenceSTFTLoss(
         fft_sizes=[512, 2048, 8192],
         hop_sizes=[128, 512, 2048],
         win_lengths=[512, 2048, 8192],
@@ -81,7 +81,7 @@ def test_perceptual_sum_and_difference():
 def test_perceptual_mel_sum_and_difference():
     target = torch.rand(8, 2, 44100)
     pred = torch.rand(8, 2, 44100)
-    loss_fn = auraloss.freq.SumAndDifferenceSTFTLoss(
+    loss_fn = RobAuraLoss.freq.SumAndDifferenceSTFTLoss(
         fft_sizes=[1024, 2048, 8192],
         hop_sizes=[256, 512, 2048],
         win_lengths=[1024, 2048, 8192],
@@ -99,7 +99,7 @@ def test_melstft():
     target = torch.rand(8, 2, 44100)
     pred = torch.rand(8, 2, 44100)
     # test MelSTFT
-    loss = auraloss.freq.MelSTFTLoss(44100)
+    loss = RobAuraLoss.freq.MelSTFTLoss(44100)
     res = loss(pred, target)
     assert res is not None
 
@@ -108,7 +108,7 @@ def test_melstft_reduction():
     target = torch.rand(8, 2, 44100)
     pred = torch.rand(8, 2, 44100)
     # test MelSTFT with no reduction
-    loss = auraloss.freq.MelSTFTLoss(44100, reduction="none")
+    loss = RobAuraLoss.freq.MelSTFTLoss(44100, reduction="none")
     res = loss(pred, target)
     assert len(res) > 1
 
@@ -117,7 +117,7 @@ def test_multires_mel():
     target = torch.rand(8, 2, 44100)
     pred = torch.rand(8, 2, 44100)
     sample_rate = 44100
-    loss = auraloss.freq.MultiResolutionSTFTLoss(
+    loss = RobAuraLoss.freq.MultiResolutionSTFTLoss(
         scale="mel",
         n_bins=64,
         sample_rate=sample_rate,
@@ -130,7 +130,7 @@ def test_perceptual_multires_mel():
     target = torch.rand(8, 2, 44100)
     pred = torch.rand(8, 2, 44100)
     sample_rate = 44100
-    loss = auraloss.freq.MultiResolutionSTFTLoss(
+    loss = RobAuraLoss.freq.MultiResolutionSTFTLoss(
         fft_sizes=[1024, 2048, 8192],
         hop_sizes=[256, 512, 2048],
         win_lengths=[1024, 2048, 8192],
@@ -152,7 +152,7 @@ def test_stft_l2():
     target = target[None, None, :]
     pred = torch.zeros_like(target)
 
-    loss = auraloss.freq.STFTLoss(
+    loss = RobAuraLoss.freq.STFTLoss(
         fft_size=N,
         hop_size=N + 1,  # eliminate padding artefacts by enforcing only one hop
         win_length=N,
@@ -180,7 +180,7 @@ def test_multires_l2():
     target = target[None, None, :]
     pred = torch.zeros_like(target)
 
-    loss = auraloss.freq.MultiResolutionSTFTLoss(
+    loss = RobAuraLoss.freq.MultiResolutionSTFTLoss(
         fft_sizes=[N],
         hop_sizes=[N + 1],  # eliminate padding artefacts by enforcing only one hop
         win_lengths=[N],
