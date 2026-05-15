@@ -1,5 +1,9 @@
 <div  align="center">
 
+# MxRobsta's Changelog
+
+* Added fix for scale-invariance failing on multi-channel inputs
+
 # auraloss
 
 <img width="200px" src="docs/auraloss-logo.svg">
