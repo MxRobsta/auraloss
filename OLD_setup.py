@@ -1,3 +1,9 @@
+"""
+DEPRECATED
+Pip wasn't happy installing using this so I'm disabling this so that it forces
+to use the pyproject.toml
+"""
+
 #!/usr/bin/env python3
 # Inspired from https://github.com/kennethreitz/setup.py
 
@@ -30,8 +36,8 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    packages=["auraloss"],
-    install_requires=["torch", "numpy"],
+    packages=["RobAuraLoss"],
+    install_requires=["torch", "numpy", "setuptools"],
     extras_require={"test": ["resampy"], "all": ["matplotlib", "librosa", "scipy"]},
     include_package_data=True,
     license="Apache License 2.0",
